@@ -284,43 +284,43 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
 	if (huart->Instance == USART3)
 	{
-		if (rx == 'A' || rx == 'B' || rx == 'C')
+		if (rx == 'A' || rx == 'B' || rx == 'C') // A = CH2, B = CH3, C = CH4
 		{
 			if (rx == 'A') timChannel = 2;
 			else if (rx == 'B') timChannel = 3;
 			else timChannel = 4;
 
-			rxIndex = 0;
+			rxIndex = 0; // bắt đầu lấy chuỗi
 		}
 
-		else if (rx == ' ' || rx == '\r' || rx == '\n')
+		else if (rx == ' ' || rx == '\r' || rx == '\n') // kết thúc một lệnh
 		{
-			if (rxIndex > 0)
+			if (rxIndex > 0) // có dữ liệu trước khi kết thúc
 			{
-				rxBuf[rxIndex] = 0;
-				int value = atoi(rxBuf);
+				rxBuf[rxIndex] = 0; // chuỗi cần kết thúc với ký tự '0' thì mới dùng atoi được
+				int value = atoi(rxBuf); // chuyển chuỗi sang integer
 
 				if (value < 0) value = 0;
 				if (value > 255) value = 255;
 
-				switch (timChannel)
+				switch (timChannel) // set giá trị cho led theo các channel riêng
 				{
 					case 2: __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, value); break;
 					case 3: __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, value); break;
 					case 4: __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_4, value); break;
 					default: break;
 				}
-				timChannel = 0;
+				timChannel = 0; // reset lại channel
 
-				rxIndex = 0;
+				rxIndex = 0; // reset lại chuỗi để nhận chuỗi khác
 			}
 		}
 		else if (rx >= '0' && rx <= '9')
 		{
 			if (rxIndex < sizeof(rxBuf) - 1)
-				rxBuf[rxIndex++] = (char)rx;
+				rxBuf[rxIndex++] = (char)rx; // thêm số vào chuỗi
 		}
-		HAL_UART_Receive_IT(&huart3, &rx, 1);
+		HAL_UART_Receive_IT(&huart3, &rx, 1); // quay lại nhận tiếp
 	}
 }
 /* USER CODE END 4 */
