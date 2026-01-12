@@ -310,6 +310,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 					case 4: __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_4, value); break;
 					default: break;
 				}
+				timChannel = 0;
 
 				rxIndex = 0;
 			}
