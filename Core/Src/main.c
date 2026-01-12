@@ -282,43 +282,42 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-	if(huart->Instance == USART3)
+	if (huart->Instance == USART3)
 	{
-		if(rx == '\n' || rx == '\r' || rx == ' ')
+		if (rx == 'A' || rx == 'B' || rx == 'C')
 		{
-			if(rxIndex > 0)
-			{
+			if (rx == 'A') timChannel = 2;
+			else if (rx == 'B') timChannel = 3;
+			else timChannel = 4;
 
+			rxIndex = 0;
+		}
+
+		else if (rx == ' ' || rx == '\r' || rx == '\n')
+		{
+			if (rxIndex > 0)
+			{
 				rxBuf[rxIndex] = 0;
 				int value = atoi(rxBuf);
 
-				if(value < 0) value = 0;
-				if(value > 255) value = 255;
+				if (value < 0) value = 0;
+				if (value > 255) value = 255;
 
-				switch(timChannel)
+				switch (timChannel)
 				{
-					case 2: __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, value);	break;
-					case 3: __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, value);	break;
-					case 4: __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_4, value);	break;
+					case 2: __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, value); break;
+					case 3: __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, value); break;
+					case 4: __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_4, value); break;
 					default: break;
 				}
+
 				rxIndex = 0;
 			}
 		}
-		else if (rx == 'A' || rx == 'B' || rx == 'C')
+		else if (rx >= '0' && rx <= '9')
 		{
-			switch(rx)
-			{
-				case 'A': timChannel = 2;	break;
-				case 'B': timChannel = 3;	break;
-				case 'C': timChannel = 4;	break;
-				default: break;
-			}
-			rxIndex = 0;
-		}
-		else if (rxIndex < sizeof(rxBuf) - 1)
-		{
-			rxBuf[rxIndex++] = rx;
+			if (rxIndex < sizeof(rxBuf) - 1)
+				rxBuf[rxIndex++] = (char)rx;
 		}
 		HAL_UART_Receive_IT(&huart3, &rx, 1);
 	}
