@@ -21,7 +21,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include <stdlib.h>
+#include "my_lib/led_ctrl.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -45,10 +46,8 @@ TIM_HandleTypeDef htim1;
 UART_HandleTypeDef huart3;
 
 /* USER CODE BEGIN PV */
+Led_Ctrl ledCtrl;
 uint8_t rx;
-char rxBuf[32];
-uint8_t rxIndex = 0;
-uint8_t timChannel;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -82,7 +81,7 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-
+  LedCtrl_Init(&ledCtrl, &huart3, &htim1);
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -282,46 +281,7 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-	if (huart->Instance == USART3)
-	{
-		if (rx == 'A' || rx == 'B' || rx == 'C') // A = CH2, B = CH3, C = CH4
-		{
-			if (rx == 'A') timChannel = 2;
-			else if (rx == 'B') timChannel = 3;
-			else timChannel = 4;
-
-			rxIndex = 0; // bắt đầu lấy chuỗi
-		}
-
-		else if (rx == ' ' || rx == '\r' || rx == '\n') // kết thúc một lệnh
-		{
-			if (rxIndex > 0) // có dữ liệu trước khi kết thúc
-			{
-				rxBuf[rxIndex] = 0; // chuỗi cần kết thúc với ký tự '0' thì mới dùng atoi được
-				int value = atoi(rxBuf); // chuyển chuỗi sang integer
-
-				if (value < 0) value = 0;
-				if (value > 255) value = 255;
-
-				switch (timChannel) // set giá trị cho led theo các channel riêng
-				{
-					case 2: __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, value); break;
-					case 3: __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, value); break;
-					case 4: __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_4, value); break;
-					default: break;
-				}
-				timChannel = 0; // reset lại channel
-
-				rxIndex = 0; // reset lại chuỗi để nhận chuỗi khác
-			}
-		}
-		else if (rx >= '0' && rx <= '9')
-		{
-			if (rxIndex < sizeof(rxBuf) - 1)
-				rxBuf[rxIndex++] = (char)rx; // thêm số vào chuỗi
-		}
-		HAL_UART_Receive_IT(&huart3, &rx, 1); // quay lại nhận tiếp
-	}
+	LedCtrl_UartRxCpltCallback(&ledCtrl, huart);
 }
 /* USER CODE END 4 */
 
