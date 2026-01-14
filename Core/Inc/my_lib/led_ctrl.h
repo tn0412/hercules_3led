@@ -29,6 +29,8 @@ typedef struct
 	uint8_t rx;
 	char rxBuf[32];
 	uint8_t rxIndex;
+
+	volatile uint8_t needPrint;
 } Led_Ctrl;
 
 void LedCtrl_Init(Led_Ctrl *lc, UART_HandleTypeDef *huart, TIM_HandleTypeDef *htim);

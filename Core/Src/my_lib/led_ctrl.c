@@ -58,6 +58,8 @@ void LedCtrl_Final(Led_Ctrl *lc)
 		if(led_value > 255) led_value = 255;
 		uint32_t tim_channel = lc->tim_ch[lc->currentCh];
 		__HAL_TIM_SET_COMPARE(lc->htim, tim_channel, led_value);
+		lc->needPrint++;
+
 		lc->currentCh = LED_CH_NONE;
 		lc->rxIndex = 0;
 	}
@@ -71,9 +73,17 @@ void LedCtrl_UartRxCpltCallback(Led_Ctrl *lc, UART_HandleTypeDef *huart)
 	uint8_t ch = lc->rx;
 
 	if(ch == 'A' || ch =='B' || ch == 'C')
+	{
+		if(lc->rxIndex > 0)
+		{
+			LedCtrl_Final(lc);
+		}
 		LedCtrl_ChooseChannel(lc, ch);
+	}
 	else if(ch == ' ' || ch == '\r' || ch == '\n')
+	{
 		LedCtrl_Final(lc);
+	}
 	else if(ch >= '0' && ch <= '9')
 		LedCtrl_Value(lc, ch);
 	HAL_UART_Receive_IT(lc->huart, &lc->rx, 1); // quay lại nhận tiếp

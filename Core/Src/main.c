@@ -100,7 +100,7 @@ int main(void)
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_4);
 
-  HAL_UART_Receive_IT(&huart3, &rx, 1);
+  HAL_UART_Receive_IT(&huart3, &ledCtrl.rx, 1);
 
   /* USER CODE END 2 */
 
@@ -109,6 +109,15 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+	  if (ledCtrl.needPrint > 0)
+	  {
+	    __disable_irq();
+	    ledCtrl.needPrint--;
+	    __enable_irq();
+
+	    char msg[] = "hello\r\n";
+	    HAL_UART_Transmit(&huart3, (uint8_t*)msg, sizeof(msg)-1, 100);
+	  }
 
     /* USER CODE BEGIN 3 */
   }
