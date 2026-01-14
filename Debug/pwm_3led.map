@@ -638,6 +638,102 @@ Discarded input sections
  .debug_macro   0x00000000      0x185 ./Core/Src/my_lib/led_ctrl.o
  .debug_macro   0x00000000       0x16 ./Core/Src/my_lib/led_ctrl.o
  .debug_macro   0x00000000       0x29 ./Core/Src/my_lib/led_ctrl.o
+ .group         0x00000000        0xc ./Core/Src/my_lib/ringbuf.o
+ .group         0x00000000        0xc ./Core/Src/my_lib/ringbuf.o
+ .group         0x00000000        0xc ./Core/Src/my_lib/ringbuf.o
+ .group         0x00000000        0xc ./Core/Src/my_lib/ringbuf.o
+ .group         0x00000000        0xc ./Core/Src/my_lib/ringbuf.o
+ .group         0x00000000        0xc ./Core/Src/my_lib/ringbuf.o
+ .group         0x00000000        0xc ./Core/Src/my_lib/ringbuf.o
+ .group         0x00000000        0xc ./Core/Src/my_lib/ringbuf.o
+ .group         0x00000000        0xc ./Core/Src/my_lib/ringbuf.o
+ .group         0x00000000        0xc ./Core/Src/my_lib/ringbuf.o
+ .group         0x00000000        0xc ./Core/Src/my_lib/ringbuf.o
+ .group         0x00000000        0xc ./Core/Src/my_lib/ringbuf.o
+ .group         0x00000000        0xc ./Core/Src/my_lib/ringbuf.o
+ .group         0x00000000        0xc ./Core/Src/my_lib/ringbuf.o
+ .group         0x00000000        0xc ./Core/Src/my_lib/ringbuf.o
+ .group         0x00000000        0xc ./Core/Src/my_lib/ringbuf.o
+ .group         0x00000000        0xc ./Core/Src/my_lib/ringbuf.o
+ .group         0x00000000        0xc ./Core/Src/my_lib/ringbuf.o
+ .group         0x00000000        0xc ./Core/Src/my_lib/ringbuf.o
+ .group         0x00000000        0xc ./Core/Src/my_lib/ringbuf.o
+ .group         0x00000000        0xc ./Core/Src/my_lib/ringbuf.o
+ .group         0x00000000        0xc ./Core/Src/my_lib/ringbuf.o
+ .group         0x00000000        0xc ./Core/Src/my_lib/ringbuf.o
+ .group         0x00000000        0xc ./Core/Src/my_lib/ringbuf.o
+ .group         0x00000000        0xc ./Core/Src/my_lib/ringbuf.o
+ .group         0x00000000        0xc ./Core/Src/my_lib/ringbuf.o
+ .group         0x00000000        0xc ./Core/Src/my_lib/ringbuf.o
+ .group         0x00000000        0xc ./Core/Src/my_lib/ringbuf.o
+ .group         0x00000000        0xc ./Core/Src/my_lib/ringbuf.o
+ .group         0x00000000        0xc ./Core/Src/my_lib/ringbuf.o
+ .group         0x00000000        0xc ./Core/Src/my_lib/ringbuf.o
+ .group         0x00000000        0xc ./Core/Src/my_lib/ringbuf.o
+ .group         0x00000000        0xc ./Core/Src/my_lib/ringbuf.o
+ .group         0x00000000        0xc ./Core/Src/my_lib/ringbuf.o
+ .group         0x00000000        0xc ./Core/Src/my_lib/ringbuf.o
+ .group         0x00000000        0xc ./Core/Src/my_lib/ringbuf.o
+ .group         0x00000000        0xc ./Core/Src/my_lib/ringbuf.o
+ .text          0x00000000        0x0 ./Core/Src/my_lib/ringbuf.o
+ .data          0x00000000        0x0 ./Core/Src/my_lib/ringbuf.o
+ .bss           0x00000000        0x0 ./Core/Src/my_lib/ringbuf.o
+ .text.RB_Init  0x00000000       0x3e ./Core/Src/my_lib/ringbuf.o
+ .text.RB_Push  0x00000000       0x58 ./Core/Src/my_lib/ringbuf.o
+ .text.RB_Pop   0x00000000       0x58 ./Core/Src/my_lib/ringbuf.o
+ .text.RB_Empty
+                0x00000000       0x2c ./Core/Src/my_lib/ringbuf.o
+ .text.RB_Full  0x00000000       0x3c ./Core/Src/my_lib/ringbuf.o
+ .debug_info    0x00000000      0x1f7 ./Core/Src/my_lib/ringbuf.o
+ .debug_abbrev  0x00000000      0x136 ./Core/Src/my_lib/ringbuf.o
+ .debug_aranges
+                0x00000000       0x40 ./Core/Src/my_lib/ringbuf.o
+ .debug_rnglists
+                0x00000000       0x2b ./Core/Src/my_lib/ringbuf.o
+ .debug_macro   0x00000000      0x1bc ./Core/Src/my_lib/ringbuf.o
+ .debug_macro   0x00000000      0xacc ./Core/Src/my_lib/ringbuf.o
+ .debug_macro   0x00000000      0x21b ./Core/Src/my_lib/ringbuf.o
+ .debug_macro   0x00000000       0x2e ./Core/Src/my_lib/ringbuf.o
+ .debug_macro   0x00000000       0x22 ./Core/Src/my_lib/ringbuf.o
+ .debug_macro   0x00000000       0x22 ./Core/Src/my_lib/ringbuf.o
+ .debug_macro   0x00000000       0x8e ./Core/Src/my_lib/ringbuf.o
+ .debug_macro   0x00000000       0x51 ./Core/Src/my_lib/ringbuf.o
+ .debug_macro   0x00000000      0x103 ./Core/Src/my_lib/ringbuf.o
+ .debug_macro   0x00000000       0x6a ./Core/Src/my_lib/ringbuf.o
+ .debug_macro   0x00000000      0x1df ./Core/Src/my_lib/ringbuf.o
+ .debug_macro   0x00000000       0x1c ./Core/Src/my_lib/ringbuf.o
+ .debug_macro   0x00000000       0x22 ./Core/Src/my_lib/ringbuf.o
+ .debug_macro   0x00000000       0xbd ./Core/Src/my_lib/ringbuf.o
+ .debug_macro   0x00000000      0xd23 ./Core/Src/my_lib/ringbuf.o
+ .debug_macro   0x00000000     0xe09e ./Core/Src/my_lib/ringbuf.o
+ .debug_macro   0x00000000       0x6d ./Core/Src/my_lib/ringbuf.o
+ .debug_macro   0x00000000     0x34a2 ./Core/Src/my_lib/ringbuf.o
+ .debug_macro   0x00000000      0x190 ./Core/Src/my_lib/ringbuf.o
+ .debug_macro   0x00000000       0x5c ./Core/Src/my_lib/ringbuf.o
+ .debug_macro   0x00000000      0x5bc ./Core/Src/my_lib/ringbuf.o
+ .debug_macro   0x00000000      0x289 ./Core/Src/my_lib/ringbuf.o
+ .debug_macro   0x00000000      0x1cb ./Core/Src/my_lib/ringbuf.o
+ .debug_macro   0x00000000      0x114 ./Core/Src/my_lib/ringbuf.o
+ .debug_macro   0x00000000      0x1b2 ./Core/Src/my_lib/ringbuf.o
+ .debug_macro   0x00000000       0x27 ./Core/Src/my_lib/ringbuf.o
+ .debug_macro   0x00000000      0x136 ./Core/Src/my_lib/ringbuf.o
+ .debug_macro   0x00000000      0x1bc ./Core/Src/my_lib/ringbuf.o
+ .debug_macro   0x00000000       0x34 ./Core/Src/my_lib/ringbuf.o
+ .debug_macro   0x00000000       0x3c ./Core/Src/my_lib/ringbuf.o
+ .debug_macro   0x00000000       0x57 ./Core/Src/my_lib/ringbuf.o
+ .debug_macro   0x00000000       0x87 ./Core/Src/my_lib/ringbuf.o
+ .debug_macro   0x00000000      0x240 ./Core/Src/my_lib/ringbuf.o
+ .debug_macro   0x00000000      0x140 ./Core/Src/my_lib/ringbuf.o
+ .debug_macro   0x00000000      0x8ed ./Core/Src/my_lib/ringbuf.o
+ .debug_macro   0x00000000      0x28e ./Core/Src/my_lib/ringbuf.o
+ .debug_macro   0x00000000       0x83 ./Core/Src/my_lib/ringbuf.o
+ .debug_macro   0x00000000       0x22 ./Core/Src/my_lib/ringbuf.o
+ .debug_line    0x00000000      0x7f2 ./Core/Src/my_lib/ringbuf.o
+ .debug_str     0x00000000    0x83799 ./Core/Src/my_lib/ringbuf.o
+ .comment       0x00000000       0x44 ./Core/Src/my_lib/ringbuf.o
+ .debug_frame   0x00000000       0xd0 ./Core/Src/my_lib/ringbuf.o
+ .ARM.attributes
+                0x00000000       0x2d ./Core/Src/my_lib/ringbuf.o
  .text          0x00000000       0x14 ./Core/Startup/startup_stm32f103c8tx.o
  .data          0x00000000        0x0 ./Core/Startup/startup_stm32f103c8tx.o
  .bss           0x00000000        0x0 ./Core/Startup/startup_stm32f103c8tx.o
@@ -2669,6 +2765,7 @@ LOAD ./Core/Src/syscalls.o
 LOAD ./Core/Src/sysmem.o
 LOAD ./Core/Src/system_stm32f1xx.o
 LOAD ./Core/Src/my_lib/led_ctrl.o
+LOAD ./Core/Src/my_lib/ringbuf.o
 LOAD ./Core/Startup/startup_stm32f103c8tx.o
 LOAD ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
 LOAD ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o

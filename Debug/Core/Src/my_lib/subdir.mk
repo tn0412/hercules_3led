@@ -5,13 +5,16 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../Core/Src/my_lib/led_ctrl.c 
+../Core/Src/my_lib/led_ctrl.c \
+../Core/Src/my_lib/ringbuf.c 
 
 OBJS += \
-./Core/Src/my_lib/led_ctrl.o 
+./Core/Src/my_lib/led_ctrl.o \
+./Core/Src/my_lib/ringbuf.o 
 
 C_DEPS += \
-./Core/Src/my_lib/led_ctrl.d 
+./Core/Src/my_lib/led_ctrl.d \
+./Core/Src/my_lib/ringbuf.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -21,7 +24,7 @@ Core/Src/my_lib/%.o Core/Src/my_lib/%.su Core/Src/my_lib/%.cyclo: ../Core/Src/my
 clean: clean-Core-2f-Src-2f-my_lib
 
 clean-Core-2f-Src-2f-my_lib:
-	-$(RM) ./Core/Src/my_lib/led_ctrl.cyclo ./Core/Src/my_lib/led_ctrl.d ./Core/Src/my_lib/led_ctrl.o ./Core/Src/my_lib/led_ctrl.su
+	-$(RM) ./Core/Src/my_lib/led_ctrl.cyclo ./Core/Src/my_lib/led_ctrl.d ./Core/Src/my_lib/led_ctrl.o ./Core/Src/my_lib/led_ctrl.su ./Core/Src/my_lib/ringbuf.cyclo ./Core/Src/my_lib/ringbuf.d ./Core/Src/my_lib/ringbuf.o ./Core/Src/my_lib/ringbuf.su
 
 .PHONY: clean-Core-2f-Src-2f-my_lib
 
