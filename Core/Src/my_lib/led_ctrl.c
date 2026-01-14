@@ -88,3 +88,25 @@ void LedCtrl_UartRxCpltCallback(Led_Ctrl *lc, UART_HandleTypeDef *huart)
 		LedCtrl_Value(lc, ch);
 	HAL_UART_Receive_IT(lc->huart, &lc->rx, 1); // quay lại nhận tiếp
 }
+
+void LedCtrl_FeedByte(Led_Ctrl *lc, uint8_t b)
+{
+	if(!lc) return;
+
+	uint8_t ch = b;
+
+	if(ch == 'A' || ch =='B' || ch == 'C')
+	{
+		if(lc->rxIndex > 0)
+		{
+			LedCtrl_Final(lc);
+		}
+		LedCtrl_ChooseChannel(lc, ch);
+	}
+	else if(ch == ' ' || ch == '\r' || ch == '\n')
+	{
+		LedCtrl_Final(lc);
+	}
+	else if(ch >= '0' && ch <= '9')
+		LedCtrl_Value(lc, ch);
+}

@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef INC_MY_LIB_RINGBUF_H_
 #define INC_MY_LIB_RINGBUF_H_
 
@@ -8,6 +10,8 @@ extern "C" {
 #include "stm32f1xx_hal.h"
 #include <stdint.h>
 #include <stdbool.h>
+
+#include "my_lib/led_ctrl.h"
 
 #define SIZE_BUF 128
 

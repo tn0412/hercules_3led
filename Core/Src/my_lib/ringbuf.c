@@ -8,6 +8,18 @@ void RB_Init(RingBuffer_t *rb)
 		rb->buf[i] = 0;
 }
 
+bool RB_Empty(RingBuffer_t *rb)
+{
+	return(rb->head == rb->tail);
+}
+
+bool RB_Full(RingBuffer_t *rb)
+{
+	uint16_t next = rb->head + 1;
+	if(next == sizeof(rb->buf)) next = 0;
+	return(next == rb->tail);
+}
+
 void RB_Push(RingBuffer_t *rb, uint8_t data)
 {
 	if(RB_Full(rb)) return;
@@ -23,16 +35,3 @@ void RB_Pop(RingBuffer_t *rb, uint8_t* data)
 	rb->tail++;
 	if(rb->tail == sizeof(rb->buf)) rb->tail = 0;
 }
-
-bool RB_Empty(RingBuffer_t *rb)
-{
-	return(rb->head == rb->tail);
-}
-
-bool RB_Full(RingBuffer_t *rb)
-{
-	uint16_t next = rb->head + 1;
-	if(next == sizeof(rb->buf)) next = 0;
-	return(next == rb->tail);
-}
-

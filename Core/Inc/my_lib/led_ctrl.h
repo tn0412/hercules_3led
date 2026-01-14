@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef LED_CTRL_H
 #define LED_CTRL_H
 
@@ -38,6 +40,7 @@ void LedCtrl_ChooseChannel(Led_Ctrl *lc, uint8_t ch);
 void LedCtrl_Value(Led_Ctrl *lc, uint8_t digit);
 void LedCtrl_Final(Led_Ctrl *lc);
 void LedCtrl_UartRxCpltCallback(Led_Ctrl *lc, UART_HandleTypeDef *huart);
+void LedCtrl_FeedByte(Led_Ctrl *lc, uint8_t b);
 
 #ifdef __cplusplus
 }

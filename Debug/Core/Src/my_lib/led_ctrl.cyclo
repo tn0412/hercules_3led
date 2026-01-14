@@ -3,3 +3,4 @@
 ../Core/Src/my_lib/led_ctrl.c:34:6:LedCtrl_Value	5
 ../Core/Src/my_lib/led_ctrl.c:44:6:LedCtrl_Final	10
 ../Core/Src/my_lib/led_ctrl.c:68:6:LedCtrl_UartRxCpltCallback	13
+../Core/Src/my_lib/led_ctrl.c:92:6:LedCtrl_FeedByte	11

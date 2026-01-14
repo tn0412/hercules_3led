@@ -22,7 +22,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "my_lib/led_ctrl.h"
-
+#include "my_lib/ringbuf.h"
+#include "my_lib/dma_ctrl.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -32,7 +33,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+#define DMA_CTRL
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -44,15 +45,19 @@
 TIM_HandleTypeDef htim1;
 
 UART_HandleTypeDef huart3;
+DMA_HandleTypeDef hdma_usart3_rx;
 
 /* USER CODE BEGIN PV */
 Led_Ctrl ledCtrl;
+RingBuffer_t rb;
 uint8_t rx;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+static void MX_DMA_Init(void);
 static void MX_TIM1_Init(void);
 static void MX_USART3_UART_Init(void);
 /* USER CODE BEGIN PFP */
@@ -81,7 +86,7 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-  LedCtrl_Init(&ledCtrl, &huart3, &htim1);
+
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -93,6 +98,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_TIM1_Init();
   MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
@@ -100,27 +106,37 @@ int main(void)
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_4);
 
-  HAL_UART_Receive_IT(&huart3, &ledCtrl.rx, 1);
-
+//  HAL_UART_Receive_IT(&huart3, &ledCtrl.rx, 1);
+//  HAL_UART_Receive_DMA(&huart3, &ledCtrl.rxBuf, rx);
+  RB_Init(&rb);
+  LedCtrl_Init(&ledCtrl, &huart3, &htim1);
+  DMA_Init(&huart3);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    /* USER CODE END WHILE */
-	  if (ledCtrl.needPrint > 0)
+	  DMA_Ctrl(&huart3, &rb);
+	  uint8_t b;
+	  while(!RB_Empty(&rb))
 	  {
-	    __disable_irq();
-	    ledCtrl.needPrint--;
-	    __enable_irq();
+		  RB_Pop(&rb, &b);
+		  LedCtrl_FeedByte(&ledCtrl, b);
 
-	    char msg[] = "hello\r\n";
-	    HAL_UART_Transmit(&huart3, (uint8_t*)msg, sizeof(msg)-1, 100);
+		  if (ledCtrl.needPrint > 0)
+		  {
+		    __disable_irq();
+		    ledCtrl.needPrint--;
+		    __enable_irq();
+
+		    char msg[] = "hello\r\n";
+		    HAL_UART_Transmit(&huart3, (uint8_t*)msg, sizeof(msg)-1, 100);
+		  }
+    /* USER CODE END WHILE */
 	  }
-
     /* USER CODE BEGIN 3 */
-  }
+	 }
   /* USER CODE END 3 */
 }
 
@@ -267,6 +283,22 @@ static void MX_USART3_UART_Init(void)
 }
 
 /**
+  * Enable DMA controller clock
+  */
+static void MX_DMA_Init(void)
+{
+
+  /* DMA controller clock enable */
+  __HAL_RCC_DMA1_CLK_ENABLE();
+
+  /* DMA interrupt init */
+  /* DMA1_Channel3_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Channel3_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Channel3_IRQn);
+
+}
+
+/**
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
@@ -288,10 +320,12 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+#ifndef DMA_CTRL
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
 	LedCtrl_UartRxCpltCallback(&ledCtrl, huart);
 }
+#endif
 /* USER CODE END 4 */
 
 /**
