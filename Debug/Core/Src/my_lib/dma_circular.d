@@ -1,5 +1,5 @@
-Core/Src/my_lib/dma_ctrl.o: ../Core/Src/my_lib/dma_ctrl.c \
- ../Core/Inc/my_lib/dma_ctrl.h \
+Core/Src/my_lib/dma_circular.o: ../Core/Src/my_lib/dma_circular.c \
+ ../Core/Inc/my_lib/dma_circular.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h \
  ../Core/Inc/stm32f1xx_hal_conf.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h \
@@ -26,7 +26,7 @@ Core/Src/my_lib/dma_ctrl.o: ../Core/Src/my_lib/dma_ctrl.c \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
  ../Core/Inc/my_lib/ringbuf.h ../Core/Inc/my_lib/led_ctrl.h
-../Core/Inc/my_lib/dma_ctrl.h:
+../Core/Inc/my_lib/dma_circular.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
 ../Core/Inc/stm32f1xx_hal_conf.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h:

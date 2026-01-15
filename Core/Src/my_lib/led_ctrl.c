@@ -65,6 +65,7 @@ void LedCtrl_Final(Led_Ctrl *lc)
 	}
 }
 
+// UART Interrupt
 void LedCtrl_UartRxCpltCallback(Led_Ctrl *lc, UART_HandleTypeDef *huart)
 {
 	if(!lc || !lc->huart) return;
@@ -89,6 +90,7 @@ void LedCtrl_UartRxCpltCallback(Led_Ctrl *lc, UART_HandleTypeDef *huart)
 	HAL_UART_Receive_IT(lc->huart, &lc->rx, 1); // quay lại nhận tiếp
 }
 
+// UART DMA Circular
 void LedCtrl_FeedByte(Led_Ctrl *lc, uint8_t b)
 {
 	if(!lc) return;

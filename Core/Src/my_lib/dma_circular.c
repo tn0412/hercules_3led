@@ -1,4 +1,4 @@
-#include "my_lib/dma_ctrl.h"
+#include <my_lib/dma_circular.h>
 
 static uint8_t  dma_rx_buf[DMA_RX_SIZE];
 static uint16_t last_pos = 0;
@@ -10,6 +10,7 @@ void DMA_Init(UART_HandleTypeDef *huart)
 	last_pos = 0;
 }
 
+// DMA circular
 void DMA_Ctrl(UART_HandleTypeDef *huart, RingBuffer_t *rb)
 {
 	uint16_t pos = DMA_RX_SIZE - __HAL_DMA_GET_COUNTER(huart->hdmarx);

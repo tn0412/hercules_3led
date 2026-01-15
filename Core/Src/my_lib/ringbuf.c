@@ -1,5 +1,7 @@
 #include "my_lib/ringbuf.h"
 
+// Phù hợp stream byte liên tục
+
 void RB_Init(RingBuffer_t *rb)
 {
 	rb->head = 0;

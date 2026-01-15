@@ -23,7 +23,7 @@
 /* USER CODE BEGIN Includes */
 #include "my_lib/led_ctrl.h"
 #include "my_lib/ringbuf.h"
-#include "my_lib/dma_ctrl.h"
+#include "my_lib/dma_idle.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -110,33 +110,36 @@ int main(void)
 //  HAL_UART_Receive_DMA(&huart3, &ledCtrl.rxBuf, rx);
   RB_Init(&rb);
   LedCtrl_Init(&ledCtrl, &huart3, &htim1);
-  DMA_Init(&huart3);
+  DMA_IDLE_Init(&huart3);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  DMA_Ctrl(&huart3, &rb);
-	  uint8_t b;
-	  while(!RB_Empty(&rb))
-	  {
-		  RB_Pop(&rb, &b);
-		  LedCtrl_FeedByte(&ledCtrl, b);
+//	  DMA_Ctrl(&huart3, &rb);
+//	  uint8_t b;
+//	  while(!RB_Empty(&rb))
+//	  {
+//		  RB_Pop(&rb, &b);
+//		  LedCtrl_FeedByte(&ledCtrl, b);
+//
+//		  if (ledCtrl.needPrint > 0)
+//		  {
+//		    __disable_irq();
+//		    ledCtrl.needPrint--;
+//		    __enable_irq();
+//
+//		    char msg[] = "hello\r\n";
+//		    HAL_UART_Transmit(&huart3, (uint8_t*)msg, sizeof(msg)-1, 100);
+//		  }
+//   	}
 
-		  if (ledCtrl.needPrint > 0)
-		  {
-		    __disable_irq();
-		    ledCtrl.needPrint--;
-		    __enable_irq();
-
-		    char msg[] = "hello\r\n";
-		    HAL_UART_Transmit(&huart3, (uint8_t*)msg, sizeof(msg)-1, 100);
-		  }
     /* USER CODE END WHILE */
-	  }
+
     /* USER CODE BEGIN 3 */
-	 }
+  }
+
   /* USER CODE END 3 */
 }
 
